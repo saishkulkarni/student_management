@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+</head>
+<body>
+    <h1>Signup Page</h1>
+    <form action="/signup" method="post" th:object="${myUser}">
+        <input type="text" name="name" placeholder="Enter Name" th:field="*{name}">
+        <span th:errors="*{name}"></span>
+        <br><br>
+        <input type="text" name="email" placeholder="Enter Email" th:field="*{email}" >
+        <span th:errors="*{email}"></span>
+        <br><br>
+        <input type="password" name="password" placeholder="Enter Password" th:field="*{password}" >
+        <span th:errors="*{password}"></span>
+        <br><br>
+        <button>Signup</button>
+    </form>
+</body>
+</html>
