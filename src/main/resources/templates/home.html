@@ -6,8 +6,18 @@
     <title>Home</title>
   </head>
   <body>
-  <h3 style="color: green;" th:text="${success}"></h3>
-   <a href="/signup"><button>Signup</button></a>
-   <a href="/login"><button>Login</button></a>
+    <h3 style="color: green" th:text="${success}"></h3>
+<div th:if="${session.user==null}">
+    <a href="/signup"><button>Signup</button></a>
+    <a href="/login"><button>Login</button></a>
+</div>
+
+<div th:if="${session.user}">
+  <a href="/insert"><button>Insert Student Record</button></a>
+  <a href="/fetch"><button>Fetch Student Record</button></a>
+  <a href="/delete"><button>Delete Student Record</button></a>
+  <a href="/update"><button>Update Student Record</button></a>
+  <a href="/logout"><button>Logout</button></a>
+</div>  
   </body>
 </html>
