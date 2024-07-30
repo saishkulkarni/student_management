@@ -10,6 +10,7 @@ import org.jsp.student_management.dto.Student;
 import org.jsp.student_management.helper.AES;
 import org.jsp.student_management.helper.HelperForSendingMail;
 import org.jsp.student_management.repository.MyUserRerpository;
+import org.jsp.student_management.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
@@ -33,6 +33,9 @@ public class MyController {
 
     @Autowired
     MyUserRerpository userRerpository;
+
+    @Autowired
+    StudentRepository studentRepository;
 
     @Autowired
     HelperForSendingMail mailHelper;
@@ -136,11 +139,12 @@ public class MyController {
     }
 
     @PostMapping("/insert")
-    @ResponseBody
     public String insert(Student student, HttpSession session, ModelMap map, @RequestParam MultipartFile image) {
         if (session.getAttribute("user") != null) {
             student.setPicture(addToCloudinary(image));
-            return student.toString();
+            studentRepository.save(student);
+            map.put("success", "Record Saved Successfully");
+            return "home.html";
         } else {
             map.put("failure", "Invalid session");
             return "login.html";
