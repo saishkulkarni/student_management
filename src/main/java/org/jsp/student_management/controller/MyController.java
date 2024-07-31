@@ -2,6 +2,7 @@ package org.jsp.student_management.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -164,6 +165,24 @@ public class MyController {
             e.printStackTrace();
         }
         return (String) resume.get("url");
+    }
+
+    @GetMapping("/fetch")
+    public String fetchAll(HttpSession session,ModelMap map){
+        if (session.getAttribute("user") != null) {
+            List<Student> list=studentRepository.findAll();
+            if(list.isEmpty()){
+                map.put("failure", "No Data Found");
+                return "home.html";
+            }
+            else{
+                map.put("list", list);
+                return "fetch.html";
+            }
+        } else {
+            map.put("failure", "Invalid session");
+            return "login.html";
+        }
     }
 
 }

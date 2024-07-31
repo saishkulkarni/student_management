@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Login Page</h1>
-    <h3 th:text="${failure}"></h3>
+    <h3 style="color: red;" th:text="${failure}"></h3>
     <form action="/login" method="post">
         Email: <input type="email" name="email">
         Password: <input type="password" name="password">
