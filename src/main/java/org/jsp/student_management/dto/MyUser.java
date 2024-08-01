@@ -9,9 +9,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-@Data
 @Entity
+@Data
 public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +25,4 @@ public class MyUser {
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",
      message = "* Enter more than 8 characters Consisting of One Upper Case, One Lower Case, One Special Charecter, One Number")
     private String password;
-
 }

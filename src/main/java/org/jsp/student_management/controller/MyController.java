@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -168,14 +169,13 @@ public class MyController {
     }
 
     @GetMapping("/fetch")
-    public String fetchAll(HttpSession session,ModelMap map){
+    public String fetchAll(HttpSession session, ModelMap map) {
         if (session.getAttribute("user") != null) {
-            List<Student> list=studentRepository.findAll();
-            if(list.isEmpty()){
+            List<Student> list = studentRepository.findAll();
+            if (list.isEmpty()) {
                 map.put("failure", "No Data Found");
                 return "home.html";
-            }
-            else{
+            } else {
                 map.put("list", list);
                 return "fetch.html";
             }
@@ -185,4 +185,40 @@ public class MyController {
         }
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id, HttpSession session, ModelMap map) {
+        if (session.getAttribute("user") != null) {
+            studentRepository.deleteById(id);
+            map.put("success", "Record Delete Success");
+            return fetchAll(session, map);
+        } else {
+            map.put("failure", "Invalid session");
+            return "login.html";
+        }
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable int id, HttpSession session, ModelMap map){
+        if (session.getAttribute("user") != null) {
+           Student student=studentRepository.findById(id).orElseThrow();
+           map.put("student", student);
+           return "update.html";
+        } else {
+            map.put("failure", "Invalid session");
+            return "login.html";
+        }
+    }
+
+    @PostMapping("/update")
+    public String update(Student student, HttpSession session, ModelMap map, @RequestParam MultipartFile image) {
+        if (session.getAttribute("user") != null) {
+            student.setPicture(addToCloudinary(image));
+            studentRepository.save(student);
+            map.put("success", "Record Updated Successfully");
+            return fetchAll(session, map);
+        } else {
+            map.put("failure", "Invalid session");
+            return "login.html";
+        }
+    }
 }

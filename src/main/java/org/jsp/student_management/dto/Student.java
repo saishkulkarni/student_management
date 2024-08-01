@@ -26,4 +26,8 @@ public class Student {
     private int subject5;
     private int subject6;
     private String picture;
+
+    public double getPercentage(){
+        return (subject1+subject2+subject3+subject4+subject5+subject6)/6.0;
+    }
 }

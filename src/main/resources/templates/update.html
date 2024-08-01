@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insert</title>
+  </head>
+  <body>
+    <form action="/update" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" th:value="${student.id}">
+      Name: <input type="text" name="name" placeholder="Enter Name" th:value="${student.name}" /> Standard:
+      <input type="text" name="standard" placeholder="Enter Standard" th:value="${student.standard}" /> Date of
+      Birth:
+      <input type="date" name="dob" placeholder="Enter Date of Birth" th:value="${student.dob}" /> Mobile
+      Number:
+      <input type="text" name="mobile" placeholder="Enter Mobile Number" th:value="${student.mobile}" />
+      Marks: Subject 1:
+      <input
+        type="number"
+        name="subject1"
+        placeholder="Enter Subject 1 Marks" th:value="${student.subject1}"
+      />
+      Subject 2:
+      <input
+        type="number"
+        name="subject2"
+        placeholder="Enter Subject 2 Marks" th:value="${student.subject2}"
+      />
+      Subject 3:
+      <input
+        type="number"
+        name="subject3"
+        placeholder="Enter Subject 3 Marks" th:value="${student.subject3}"
+      />
+      Subject 4:
+      <input
+        type="number"
+        name="subject4"
+        placeholder="Enter Subject 4 Marks" th:value="${student.subject4}"
+      />
+      Subject 5:
+      <input
+        type="number"
+        name="subject5"
+        placeholder="Enter Subject 5 Marks" th:value="${student.subject5}"
+      />
+      Subject 6:
+      <input
+        type="number"
+        name="subject6"
+        placeholder="Enter Subject 6 Marks" th:value="${student.subject6}"
+      />
+
+      Picture : <input type="file" name="image" />
+      <img th:src="${student.picture}" alt="alt" height="50px" width="50px" />
+      <button>Update</button>
+    </form>
+  </body>
+</html>

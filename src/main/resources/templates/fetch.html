@@ -7,36 +7,28 @@
   </head>
   <body>
     <div align="center">
+      <h3 style="color: green;" th:text="${success}"></h3>
       <table border="1">
         <tr>
-          <th rowspan="2">Name</th>
-          <th rowspan="2">Picture</th>
-          <th rowspan="2">Mobile</th>
-          <th rowspan="2">Date of Birth</th>
-          <th rowspan="2">Standard</th>
-          <th colspan="6">Marks</th>
-          <th rowspan="2">Percenatge</th>
-          <th rowspan="2">Edit</th>
-          <th rowspan="2">Delete</th>
-        </tr>
-        <tr>
+          <th>Name</th>
+          <th>Picture</th>
+          <th>Mobile</th>
+          <th>Date of Birth</th>
+          <th>Standard</th>
           <th>Subject1</th>
           <th>Subject2</th>
           <th>Subject3</th>
           <th>Subject4</th>
           <th>Subject5</th>
           <th>Subject6</th>
+          <th>Percenatge</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
-
         <tr th:each="s:${list}">
           <td th:text="${s.name}"></td>
           <td>
-            <img
-              th:src="${s.picture}"
-              alt="alt"
-              height="100px"
-              width="100px"
-            />
+            <img th:src="${s.picture}" alt="alt" height="100px" width="100px" />
           </td>
           <td th:text="${s.mobile}"></td>
           <td th:text="${s.dob}"></td>
@@ -47,16 +39,16 @@
           <td th:text="${s.subject4}"></td>
           <td th:text="${s.subject5}"></td>
           <td th:text="${s.subject6}"></td>
-          <td
-            th:text="${(s.subject1+s.subject2+s.subject3+s.subject4+s.subject5+s.subject6)/6.0}"
-          ></td>
-          <td><button>Edit</button></td>
-          <td><button>Delete</button></td>
+          <td th:text="${s.percentage}"></td>
+          <td><a th:href="'/edit/'+${s.id}"><button>Edit</button></a></td>
+          <td>
+            <a th:href="'/delete/'+${s.id}"><button>Delete</button></a>
+          </td>
         </tr>
       </table>
-    <br><br><br>
-    <a href="/"><button>Back</button></a>
+      <br /><br /><br />
+      <a href="/"><button>Back</button></a>
     </div>
-    
+
   </body>
 </html>
